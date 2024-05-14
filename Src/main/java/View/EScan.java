@@ -93,7 +93,7 @@ public class EScan extends javax.swing.JFrame {
         loginfo.setEditable(false);
         loginfo.setBackground(new java.awt.Color(0, 0, 0));
         loginfo.setColumns(20);
-        loginfo.setForeground(new java.awt.Color(0, 0, 0));
+        loginfo.setForeground(new java.awt.Color(51, 255, 51));
         loginfo.setLineWrap(true);
         loginfo.setRows(5);
         loginfo.setText("----- ESCAN -------\n-- Scan Web Application Security --\n");
