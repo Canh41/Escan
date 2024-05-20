@@ -59,6 +59,7 @@ Spider\SpiderWeb.class
 Scan\A3Injection\Scan_xmlinjection.class
 PayloadSignature\A3Injection\ServerSideIncludesInjection.class
 Scan\A1BrokenAccessControl\Scan_Host_Header_Attack.class
+View\EScan$11.class
 InformationGathering\Info.class
 Scan\A1BrokenAccessControl\Scan_Directory_Traversal_Files.class
 Scan\A2CryptographicFailures\Scan_Base64EncodeSecret.class

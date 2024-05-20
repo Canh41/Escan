@@ -5,8 +5,15 @@
 package View;
 
 import FunctionPlus.ScanVuln;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -69,6 +76,7 @@ public class EScan extends javax.swing.JFrame {
         scan = new javax.swing.JButton();
         stop = new javax.swing.JButton();
         clear = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -154,16 +162,26 @@ public class EScan extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 51));
+        jButton1.setText("Report");
+        jButton1.setToolTipText("");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scan, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(stop, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(clear, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(scan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(stop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -172,7 +190,9 @@ public class EScan extends javax.swing.JFrame {
                 .addComponent(scan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stop)
-                .addGap(46, 46, 46)
+                .addGap(11, 11, 11)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(clear)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -398,6 +418,39 @@ public class EScan extends javax.swing.JFrame {
         model.setNumRows(0);
     }//GEN-LAST:event_clearActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        FileWriter out = null;
+        try {
+            // TODO add your handling code here:
+            TableModel model = jTable1.getModel();
+            File file = new File("Report.xlsx");
+            out = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(out);
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                bw.write(model.getColumnName(i) + "\t");
+            }   bw.write("\n");
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    bw.write(model.getValueAt(i, j).toString() + "\t");
+                }
+                bw.write("\n");
+            }   bw.close();
+            System.out.print("Write out to" + file);
+            JOptionPane.showMessageDialog(this, "Report Done !!!");
+        } catch (IOException ex) {
+            Logger.getLogger(EScan.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                out.close();
+            } catch (IOException ex) {
+                Logger.getLogger(EScan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+       
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -436,6 +489,7 @@ public class EScan extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
     private javax.swing.JTextField cookie;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
